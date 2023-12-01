@@ -21,17 +21,15 @@ class Day01 {
     }
 
     fun secondStar(input: List<String>): Int = input.map { line ->
-        replaceWordWithNumber(line, String::findAnyOf)?.let {
-            replaceWordWithNumber(
-                it, String::findLastAnyOf
-            )
-        }
-    }.let { firstStar(it as List<String>) }
+        getNumber(line, String::findAnyOf) * 10 + getNumber(line, String::findLastAnyOf)
+    }.sum()
 
-    fun replaceWordWithNumber(line: String, function: (String, Collection<String>) -> Pair<Int, String>?): String? =
-        function(line, WORD_NUMBERS)
-            ?.let { (index, number) ->
-                line.take(index) + (WORD_NUMBERS.indexOf(number) + 1) + line.drop(index)
-            }
+    fun getNumber(line: String, function: (String, Collection<String>) -> Pair<Int, String>?) =
+        function(line, WORD_NUMBERS + NUMBERS.map { it.toString() })
+            ?.let { (_, number) ->
+                if (number.length > 1)
+                    (WORD_NUMBERS.indexOf(number) + 1)
+                else number.toInt()
+    }!!
 }
 
