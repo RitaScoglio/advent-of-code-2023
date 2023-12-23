@@ -43,8 +43,10 @@ class Day23 {
                     tiles[Coors(row, col)] = input[row][col]
             }
         }
-        solvePuzzle(tiles, Pair(input.size, input[0].length), true)
-        solvePuzzle(tiles, Pair(input.size, input[0].length), false)
+        //firstStar
+        println(solvePuzzle(tiles, Pair(input.size, input[0].length), true))
+        //secondStar
+        println(solvePuzzle(tiles, Pair(input.size, input[0].length), false))
     }
 
     fun solvePuzzle(tiles: MutableMap<Coors, Char>, maxSize: Pair<Int, Int>, slope: Boolean): Int {
